@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require './connexion.php';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./dist/output.css">
-    <link rel="stylesheet" href="./style.css">
-    <title>employee submited</title>
-</head>
+$first_name = $_POST['first_name'];
+$last_name = $_POST['last_name'];
+$email = $_POST['email'];
+$hire_date = date("Y-m-d");
+$job_id = $_POST['job'];
+$salary = $_POST['salary'];
 
-<body class="bg-gray-800 text-gray-200">
-    
-    
-</body>
+$sql = "INSERT into employees(first_name, last_name, email, hire_date, job_id, salary) values 
+('$first_name', '$last_name', '$email', '$hire_date', 3, $salary);";
 
-</html>
+$res = mysqli_query($conn, $sql);
+
+if ($res)
+    header("location:index.php");
+
+
+
+
+
+mysqli_close($conn);
+?>

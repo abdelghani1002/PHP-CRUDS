@@ -1,3 +1,6 @@
+<?php
+require './connexion.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +28,20 @@
 
             <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="job" id="job">
                 <option class="text-gray-500" disabled selected value="">Select Job</option>
+                <?php
+                echo "test";
+                $sql = "select * from jobs;";
+                $res = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($res) > 0) :
+                    print_r($res);
+                    while ($row = mysqli_fetch_assoc($res)) :
+                        echo "<option value=" . $row['job_id'] . ">" . $row['job_title'] . "</option>";
+                    endwhile;
+                endif;
+
+                ?>
             </select>
-            
+
             <input class="py-2 px-1 m-3 w-100 bg-gray-200 rounded-md" type="number" name="salary" id="salary" placeholder="Salary">
             <input class="py-2 px-1 mt-3 w-100 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-md w-2/3 m-auto " type="submit" name="btn" id="btn" value="Submit">
         </form>

@@ -1,3 +1,15 @@
+<?php
+require './connexion.php';
+
+
+$sql = "select employees.employee_id, employees.first_name, employees.last_name, employees.email, hire_date, employees.job_id, jobs.job_title, salary from employees inner join jobs on jobs.job_id = employees.job_id order by employees.employee_id desc;";
+$result = mysqli_query($conn, $sql);
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +40,7 @@
 
         <a class="p-2 rounded-lg hover:bg-red-500 border-2 border-red-500" 
             href="./deleteall.php" onclick="return confirmDeleteAll()">
-            Delete All Employee
+            Delete All Employees
         </a>
     </div>
 
@@ -46,19 +58,33 @@
                 </tr>
             </thead>
             <tbody>
-                        <tr class="odd:bg-gray-700">
-                            <td class="py-3">id</td>
-                            <td class="py-3">first_name last_name</td>
-                            <td class="py-3">email</td>
-                            <td class="py-3">hire_date</td>
-                            <td class="py-3">job</td>
-                            <td class="py-3">salary</td>
+                <?php
+                if (mysqli_num_rows($result) > 0):
+                    while($row = mysqli_fetch_assoc($result)):
+                        $id = $row['employee_id'];
+                        $first_name = $row['first_name'];
+                        $last_name = $row['last_name'];
+                        $email = $row['email'];
+                        $hire_date = $row['hire_date'];
+                        $job_id = $row['job_id'];
+                        $job = $row['job_title'];
+                        $salary = $row['salary'];
+
+                    ?>
+                    <tr class="odd:bg-gray-700">
+                            <td class="py-3"><?=$id?></td>
+                            <td class="py-3"><?=$first_name . " " . $last_name?></td>
+                            <td class="py-3"><?=$email?></td>
+                            <td class="py-3"><?=$hire_date?></td>
+                            <td class="py-3"><?=$job?></td>
+                            <td class="py-3"><?=$salary?></td>
 
                             <td class="text-right">
                                 <form class="pr-3" method='get'>
-                                    <button type='button'>
+
+                                    <button type='button' >
                                         <a class="hover:bg-red-500 hover:text-white text-red-500 rounded-md p-2" 
-                                                href="delete.php?id=id" onclick="return confirmDelete()">
+                                                href="delete.php?id=<?=$id?>" onclick="return confirmDelete()">
                                             Delete
                                         </a>
                                     </button>
@@ -68,13 +94,20 @@
                                 <form class="pl-3" method='get'>
                                     <button type='button'>
                                         <a class="hover:bg-emerald-500 hover:text-white text-emerald-500 rounded-md p-2"
-                                                href="editForm.php?id=id">
+                                                href="editForm.php?id=<?= $id ?>">
                                             Update
                                         </a>
                                     </button>
                                 </form>
                             </td>
                         </tr>
+
+<?php
+                    endwhile;
+                endif;
+                mysqli_close($conn);
+
+?>                        
             </tbody>
         </table>
     </div>
