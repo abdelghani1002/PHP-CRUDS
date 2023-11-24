@@ -12,15 +12,24 @@
 <body class="bg-gray-800 text-gray-200 p-5">
 
     <header class="text-center">
-        <h1 class="text-4xl font-extrabold">CRUDS PHP APPLICATION</h1>
+        <h1 class="text-4xl font-extrabold">C<span style="color:blueviolet; font-size: 3rem;">R</span>UDS PHP APPLICATION</h1>
     </header>
 
     <div class="flex flex-row justify-evenly w-100 my-6 text-lg">
-        <a class="p-2 rounded-lg hover:bg-blue-500 border-2 border-blue-500" href="./createForm.php" method="POST"><button class='btn' type="submit">Add Employee</button></a>
+        <a class="p-2 rounded-lg hover:bg-blue-500 border-2 border-blue-500" 
+            href="./createForm.php" method="POST">
+            Add Employee
+        </a>
 
-        <a class="p-2 rounded-lg hover:bg-teal-800 border-2 border-teal-800" href="./chercher.php" method="post"><button class='btn' type="submit">Search Employee</button></a>
+        <a class="p-2 rounded-lg hover:bg-teal-800 border-2 border-teal-800"
+            href="./chercher.php" method="post">
+            Search Employee
+        </a>
 
-        <a class="p-2 rounded-lg hover:bg-red-500 border-2 border-red-500" href="./deleteall.php" onclick="return confirmDeleteAll()"><button class='btn' type="submit">Delete All Employee</button></a>
+        <a class="p-2 rounded-lg hover:bg-red-500 border-2 border-red-500" 
+            href="./deleteall.php" onclick="return confirmDeleteAll()">
+            Delete All Employee
+        </a>
     </div>
 
     <div class="container">
@@ -32,21 +41,19 @@
                     <th class="py-5 bg-gray-900">Email</th>
                     <th class="py-5 bg-gray-900">Hire date</th>
                     <th class="py-5 bg-gray-900">Job</th>
-                    <th class="py-5 bg-gray-900">Salary (MAD)</th>
+                    <th class="py-5 bg-gray-900">Salary <small>(MAD)</small></th>
                     <th class="py-5 bg-gray-900" colspan='2'>Manage</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                require 'connexion.php';
+                require './connexion.php';
 
                 $sql = "select `employee_id`, `first_name`, `last_name`, `email`, `hire_date`, `job_id`, `salary` from employees;";
                 $result = mysqli_query($connexion, $sql);
-
                 $id;
 
                 if (mysqli_num_rows($result) > 0) {
-
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row["employee_id"];
                         $first_name = $row["first_name"];
@@ -95,7 +102,7 @@
     <script>
         function confirmDelete(id) {
             var confirmation = confirm(`Are you sure you want to delete this employee-${id}?`);
-            return confirmDelete;                              
+            return confirmation;                              
         }
         function confirmDeleteAll(){
             var confirmation = confirm("Are you sure you want to delete All the empolyees!!?");

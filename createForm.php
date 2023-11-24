@@ -17,7 +17,7 @@ require './connexion.php';
 <body class="bg-gray-800 p-5 w-100">
 
     <header class="text-center mb-8 text-gray-200">
-        <h1 class="text-4xl font-extrabold">CRUD PHP APPLICATION</h1>
+        <h1 class="text-4xl font-extrabold"><span style="color:blueviolet; font-size: 3rem;">C</span>RUDS PHP APPLICATION</h1>
     </header>
 
     <div class="w-1/3 m-auto">
@@ -28,7 +28,6 @@ require './connexion.php';
 
             <select class="py-2 px-1 m-3 w-100 bg-gray-200 text-gray-500 rounded-md" name="job" id="job">
                 <option class="text-gray-500" disabled selected value="">Select Job</option>
-
 
                 <?php
                 $sql = "select job_id, job_title from jobs;";
@@ -46,7 +45,6 @@ require './connexion.php';
                 }
                 mysqli_close($connexion);
                 ?>
-
             </select>
             <input class="py-2 px-1 m-3 w-100 bg-gray-200 rounded-md" type="number" name="salary" id="salary" placeholder="Salary">
             <input class="py-2 px-1 mt-3 w-100 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-md w-2/3 m-auto " type="submit" name="btn" id="btn" value="Submit">

@@ -32,7 +32,7 @@ if (mysqli_num_rows($result) > 0) {
 <body class="bg-gray-800 p-5 w-100">
 
     <header class="text-center mb-8 text-gray-200">
-        <h1 class="text-4xl font-extrabold">CRUD PHP APPLICATION</h1>
+        <h1 class="text-4xl font-extrabold">CR<span style="color:blueviolet; font-size: 3rem;">U</span>DS PHP APPLICATION</h1>
     </header>
 
     <div class="w-1/3 m-auto">
