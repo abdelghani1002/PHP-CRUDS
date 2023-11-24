@@ -1,13 +1,9 @@
 <?php
+    include './connexion.php' ;
 
-    include 'connexion.php' ;
-
-    $id = $_GET['deleteid'];
-    $sql = "delete from user where id = $id;";
-    $result = $connexion->query($sql); 
+    $id = $_GET['id'];
+    $sql = "delete from employees where employee_id = $id;";
+    $result = $connexion->query($sql);
+    mysqli_close($connexion);
     header('location:index.php');
-
-
-
-
 ?>

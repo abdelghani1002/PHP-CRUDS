@@ -12,7 +12,7 @@
 <body class="bg-gray-800 text-gray-200 p-5">
 
     <header class="text-center">
-        <h1 class="text-4xl font-extrabold">CRUD PHP APPLICATION</h1>
+        <h1 class="text-4xl font-extrabold">CRUDS PHP APPLICATION</h1>
     </header>
 
     <div class="flex flex-row justify-evenly w-100 my-6 text-lg">
@@ -20,7 +20,7 @@
 
         <a class="p-2 rounded-lg hover:bg-teal-800 border-2 border-teal-800" href="./chercher.php" method="post"><button class='btn' type="submit">Search Employee</button></a>
 
-        <a class="p-2 rounded-lg hover:bg-red-500 border-2 border-red-500" href="./deleteall.php"><button class='btn' type="submit">Delete All Employee</button></a>
+        <a class="p-2 rounded-lg hover:bg-red-500 border-2 border-red-500" href="./deleteall.php" onclick="return confirmDeleteAll()"><button class='btn' type="submit">Delete All Employee</button></a>
     </div>
 
     <div class="container">
@@ -62,13 +62,14 @@
                             <td class="py-3"><?= $first_name . $last_name ?></td>
                             <td class="py-3"><?= $email ?></td>
                             <td class="py-3"><?= $hire_date ?></td>
-                            <td class="py-3"><?= $job?></td>
+                            <td class="py-3"><?= $job ?></td>
                             <td class="py-3"><?= $salary ?></td>
 
                             <td class="text-right">
                                 <form class="pr-3" method='get'>
                                     <button type='button'>
-                                        <a class="hover:bg-red-500 hover:text-white text-red-500 rounded-md p-2" href="delete.php?id=<?= $id ?>">Delete</a>
+                                        <a class="hover:bg-red-500 hover:text-white text-red-500 rounded-md p-2" 
+                                        href="delete.php?id=<?= $id ?>" onclick="return confirmDelete(<?=$id?>)">Delete</a>
                                     </button>
                                 </form>
                             </td>
@@ -89,9 +90,18 @@
                 ?>
             </tbody>
         </table>
+    </div>
 
-
-
+    <script>
+        function confirmDelete(id) {
+            var confirmation = confirm(`Are you sure you want to delete this employee-${id}?`);
+            return confirmDelete;                              
+        }
+        function confirmDeleteAll(){
+            var confirmation = confirm("Are you sure you want to delete All the empolyees!!?");
+            return confirmation;
+        }
+    </script>
 </body>
 
 </html>

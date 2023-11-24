@@ -1,9 +1,10 @@
 <?php
 
-    include 'connexion.php' ; 
+    include 'connexion.php'; 
 
-    $sql = "delete from user;";
-    $result = $connexion->query($sql); 
+    $sql = "delete from employees;";
+    $result = $connexion->query($sql);
+    mysqli_close($connexion);
     header('location:index.php');
 
 
