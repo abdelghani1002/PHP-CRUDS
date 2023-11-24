@@ -1,73 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link href="./dist/output.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <title>CRUDS in PHP MySQLi</title>
 </head>
-<body>
-    <header>
-        <form action="index.php"><button class="btn1 btn2">Return</button></form>
-        <div class="head">
-                 <h1>CRUD PHP APPLICATION</h1>
-        </div>
+
+<body class="bg-gray-800 text-gray-200 p-5">
+
+    <header class="text-center">
+        <h1 class="text-4xl font-extrabold">C<span style="color:blueviolet; font-size: 3rem;">R</span>UDS PHP APPLICATION</h1>
     </header>
 
-    <div class="cher">
-    <form action="" method="post"><input type="text" class="input1" placeholder="Saise Le Nom" name="ch">
-        <input type="submit" class='btn1'  value="Chercher">
-    </form>
+    <div class="flex flex-row justify-evenly w-100 my-6 text-lg">
+        <a class="p-2 rounded-lg hover:bg-blue-500 border-2 border-blue-500" 
+            href="./createForm.php" method="POST">
+            Add Employee
+        </a>
+
+        <a class="p-2 rounded-lg hover:bg-teal-800 border-2 border-teal-800"
+            href="./chercher.php" method="post">
+            Search Employee
+        </a>
+
+        <a class="p-2 rounded-lg hover:bg-red-500 border-2 border-red-500" 
+            href="./deleteall.php" onclick="return confirmDeleteAll()">
+            Delete All Employee
+        </a>
     </div>
-   
-<div class="container">
-<?php 
 
-    include 'connexion.php';
+    <div class="container">
+        <table class="table-auto w-full text-center whitespace-no-wrap border-spacing-2">
+            <thead>
+                <tr>
+                    <th class="py-5 bg-gray-900">ID</th>
+                    <th class="py-5 bg-gray-900">Full name</th>
+                    <th class="py-5 bg-gray-900">Email</th>
+                    <th class="py-5 bg-gray-900">Hire date</th>
+                    <th class="py-5 bg-gray-900">Job</th>
+                    <th class="py-5 bg-gray-900">Salary <small>(MAD)</small></th>
+                    <th class="py-5 bg-gray-900" colspan='2'>Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                        <tr class="odd:bg-gray-700">
+                            <td class="py-3">id</td>
+                            <td class="py-3">first_name last_name</td>
+                            <td class="py-3">email</td>
+                            <td class="py-3">hire_date</td>
+                            <td class="py-3">job</td>
+                            <td class="py-3">salary</td>
 
-    $nm1 ; 
-        if(!empty($_POST['ch']))
-        {
-            $nm1 = $_POST['ch'];
-            
-            $sql1 = "select * from user where nom = '$nm1';";
-            
-            $result1 = $connexion->query($sql1); 
-        
-        $table1 = "<table><thead><tr><th>ID</th>
-        <th>Code</th>
-        <th>Nom</th><th>Tva</th>
-        <th>Quantité</th>
-        <th>Delete</th>
-        <th>Update</th>
-        </tr><tr></thead>";
-    
-        $id1;
+                            <td class="text-right">
+                                <form class="pr-3" method='get'>
+                                    <button type='button'>
+                                        <a class="hover:bg-red-500 hover:text-white text-red-500 rounded-md p-2" 
+                                                href="delete.php?id=id" onclick="return confirmDelete()">
+                                            Delete
+                                        </a>
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-left">
+                                <form class="pl-3" method='get'>
+                                    <button type='button'>
+                                        <a class="hover:bg-emerald-500 hover:text-white text-emerald-500 rounded-md p-2"
+                                                href="editForm.php?id=id">
+                                            Update
+                                        </a>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+    </div>
 
-        if ($result1->num_rows > 0) {
-
-            while($row = $result1->fetch_assoc()){
-            
-            $id1 = $row["id"];
-            $table1 .= "<tr><td>".$row["id"]."</td>".
-            "<td>".$row["code"]."</td>". "<td>"
-            .$row["nom"]."</td>"."<td>".$row["tva"]
-            ."%</td>"."<td>".$row["qte"]."</td>"."<td>".
-            " <form method='get'> <button type='button'><a class='a1' href='delete.php?deleteid=".$id1."'>Delete</a></button></form>".
-            "</td><td>".
-            " <form method='get'> <button type='button'><a class='a2' href='update.php?updateid=".$id1."'>Update</a></button></form>".
-            "</td></tr>";
-            }
+    <script>
+        function confirmDelete() {
+            var confirmation = confirm(`Are you sure you want to delete this employee?`);
+            return confirmation;                              
         }
-
-        $table1 .= "</table></div>";
-        echo $table1 ;
+        function confirmDeleteAll(){
+            var confirmation = confirm("Are you sure you want to delete All the empolyees!!?");
+            return confirmation;
         }
-
-        $connexion->close();
-       
-?>
-
+    </script>
 </body>
+
 </html>
